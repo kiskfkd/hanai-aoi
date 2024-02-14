@@ -3,6 +3,7 @@
 #include <assert.h>
 #include "Stone.h"
 #include"Camera.h"
+#include"Field.h"
 namespace
 {
 	const float MOVE_SPEED = 4.0f;
@@ -40,6 +41,13 @@ void Player::Update()
 			animeFrame = (animeFrame + 1) % 4;
 			frameCounter = 0;
 		}
+		int hitX = transform_.position_.x + 50;
+		int hitY = transform_.position_.y + 63;
+		Field* pField = GetParent()->FindChildObject<Field>();
+	if(pField !=nullptr){
+		int push = pField->CollsionRight(hitX, hitY);
+		transform_.position_.x
+	}
 	}
 	else if (CheckHitKey(KEY_INPUT_A))
 	{
@@ -75,6 +83,15 @@ void Player::Update()
 
 	jumpSpeed += GRAVITY;
 	transform_.position_.y +=jumpSpeed ;
+	if (pField != nullptr) {
+		int push = pField->CollisionDown(transform_.position_.x+50,transform_.position_.y+63)
+			if (push > 0)
+			{
+				transform_.posision_.y -= push;
+				jumpspeed = 0.0f;
+				onGround = true;
+		}
+	}
 	if (transform_.position_.y >= GROUND) {
 		transform_.position_.y = GROUND;
 		jumpSpeed = 0.0f;
@@ -89,6 +106,11 @@ void Player::Update()
 		Camera* cam = GetParent()->FindGameObject<Camera>();
 		cam->SetValue(cam->SetValue());
 	}
+}
+Camera* cam = GetParent()->FindGameObject<Camera>();
+int x = (int)transform_.position_.x - cam->SetValue();
+if (x > 400) {
+
 }
 
 void Player::Draw()
