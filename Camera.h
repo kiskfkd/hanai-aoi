@@ -8,5 +8,8 @@ public:
     ~Camera();
 
     void SetValue(int v){ value = v; }
+    int GetValue() { return value; }
+private:
+    int value;
 };
 

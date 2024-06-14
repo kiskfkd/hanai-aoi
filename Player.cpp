@@ -104,14 +104,14 @@ void Player::Update()
 		Stone* st = Instantiate<Stone>(GetParent());
 		st->SetPosition(transform_.position_);
 		Camera* cam = GetParent()->FindGameObject<Camera>();
-		cam->SetValue(cam->SetValue());
+		cam->SetValue(cam->GetValue()+1);
 	}
 }
-Camera* cam = GetParent()->FindGameObject<Camera>();
-int x = (int)transform_.position_.x - cam->SetValue();
-if (x > 400) {
-
-}
+//Camera* cam = GetParent()->FindGameObject<Camera>();
+//int x = (int)transform_.position_.x - cam->SetValue();
+//if (x > 400) {
+//
+//}
 
 void Player::Draw()
 {
@@ -119,7 +119,7 @@ void Player::Draw()
 	int y = (int)transform_.position_.y;
 	Camera* cam = GetParent()->FindGameObject<Camera>();
 	if (cam != nullptr) {
-		x -= cam->SetValue();
+		x -= cam->GetValue();
 	}
 	DrawRectGraph(x, y, animeFrame*64, 0, 64, 64, hImage, TRUE);
 }
