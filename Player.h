@@ -21,4 +21,6 @@ private:
 	int animeType;
 	int animeFrame;
 	int frameCounter;
+
+
 };

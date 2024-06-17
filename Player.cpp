@@ -22,6 +22,7 @@ Player::Player(GameObject* parent) : GameObject(sceneTop)
 	//jumpflag = false;
 	onGround = true;
 	frameCounter = 0;
+
 }
 
 Player::~Player()
@@ -34,6 +35,8 @@ Player::~Player()
 
 void Player::Update()
 {
+	Field* pField = GetParent()->FindGameObject<Field>();
+
 	if (CheckHitKey(KEY_INPUT_D))
 	{
 		transform_.position_.x += MOVE_SPEED;
@@ -43,11 +46,12 @@ void Player::Update()
 		}
 		int hitX = transform_.position_.x + 50;
 		int hitY = transform_.position_.y + 63;
-		Field* pField = GetParent()->FindChildObject<Field>();
+		
 	if(pField !=nullptr){
-		int push = pField->CollsionRight(hitX, hitY);
-		transform_.position_.x
+		int push = pField->CollisionRight(hitX, hitY);
+		transform_.position_.x -= push;
 	}
+
 	}
 	else if (CheckHitKey(KEY_INPUT_A))
 	{
@@ -84,20 +88,25 @@ void Player::Update()
 	jumpSpeed += GRAVITY;
 	transform_.position_.y +=jumpSpeed ;
 	if (pField != nullptr) {
-		int push = pField->CollisionDown(transform_.position_.x+50,transform_.position_.y+63)
-			if (push > 0)
-			{
-				transform_.posision_.y -= push;
-				jumpspeed = 0.0f;
+		int pushR = pField->CollisionDown(transform_.position_.x + 50, transform_.position_.y + 63);
+		int pushL = pField->CollisionDown(transform_.position_.x + 14, transform_.position_.y + 64);
+		int push = max(pushR, pushL);
+			if (push >= 1){
+				transform_.position_.y -= push-1;
+				jumpSpeed = 0.0f;
 				onGround = true;
-		}
+			}
+			else {
+				onGround = false;
+			}
 	}
-	if (transform_.position_.y >= GROUND) {
-		transform_.position_.y = GROUND;
-		jumpSpeed = 0.0f;
-		//jumpflag = false;
-		onGround = true;
-	}
+
+	//if (transform_.position_.y >= GROUND) {
+	//	transform_.position_.y = GROUND;
+	//	jumpSpeed = 0.0f;
+	//	//jumpflag = false;
+	//	onGround = true;
+	//}
 
 	if (CheckHitKey(KEY_INPUT_M))
 	{
@@ -106,12 +115,16 @@ void Player::Update()
 		Camera* cam = GetParent()->FindGameObject<Camera>();
 		cam->SetValue(cam->GetValue()+1);
 	}
+
+Camera* cam = GetParent()->FindGameObject<Camera>();
+int x = (int)transform_.position_.x - cam->GetValue();
+if (x > 400) {
+	x = 400;
+	cam->SetValue((int)transform_.position_.x-x);
 }
-//Camera* cam = GetParent()->FindGameObject<Camera>();
-//int x = (int)transform_.position_.x - cam->SetValue();
-//if (x > 400) {
-//
-//}
+
+}
+
 
 void Player::Draw()
 {

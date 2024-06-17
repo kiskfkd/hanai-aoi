@@ -4,8 +4,8 @@ class Camera :
     public GameObject
 {
 public:
-    Camera();
-    ~Camera();
+    Camera(GameObject*parent):GameObject(parent) { value = 0; }
+    ~Camera(){}
 
     void SetValue(int v){ value = v; }
     int GetValue() { return value; }

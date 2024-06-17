@@ -53,7 +53,7 @@ void Field::Draw()
 	int scroll = 0;
 	Camera* cam = GetParent()->FindGameObject<Camera>();
 	if (cam != nullptr) {
-		scroll = cam->SetValue();
+		scroll = cam->GetValue();
 	}
 	for(int y=0;y< HEIGHT;y++)
 	for (int x = 0; x < WIDTH; x++) {
@@ -63,27 +63,26 @@ void Field::Draw()
 	
 	
 }
-int Field::CollsionRight(int x, int y) {
-	int chipX = x/32 ;
-	int chipY = y/32 ;
-	switch (Map[chipY][chipX]) {
-	case 16:
-	case 17:
-	case 18:
-	case 19:
-	case 32:
-	case 33:
-	case 34:
-	case 35:
-
+int Field::CollisionRight(int x, int y) {
+	//int chipX = x/32 ;
+	//int chipY = y/32 ;
+	//switch (Map[chipY][chipX]) {
+	//case 16:
+	//case 17:
+	//case 18:
+	//case 19:
+	//case 32:
+	//case 33:
+	//case 34:
+	//case 35:
+	if(IsWallBlock(x,y))
 		return x%32+1;
-	default:
-		break;
-	}
 	return 0;
 }
 int Field::Field::CollisionDown(int x, int y) {
-
+	if (IsWallBlock(x, y))
+		return x % 32 + 1;
+	return 0;
 }
 bool Field::IsWallBlock(int x, int y) {
 	int chipX = x / 32;
