@@ -1,8 +1,13 @@
 #include "Stone.h"
 #include <assert.h>
+#include "Camera.h"
+namespace {
+	const float speed = 2.0f;
+}
 
 Stone::Stone(GameObject* scene) : GameObject(scene)
 {
+
 	hImage = LoadGraph("Assets/stone.png");
 	assert(hImage > 0);
 }
@@ -17,6 +22,7 @@ Stone::~Stone()
 
 void Stone::Update()
 {
+	transform_.position_.x += speed;
 	if (--timer <= 0)
 	{
 		KillMe();
@@ -27,11 +33,15 @@ void Stone::Draw()
 {
 	int x = (int)transform_.position_.x;
 	int y = (int)transform_.position_.y;
+	Camera* cam = GetParent()->FindGameObject<Camera>();
+	if (cam != nullptr) {
+		x -= cam->GetValue();
+	}
 	DrawGraph(x, y, hImage, TRUE);
 }
 
 void Stone::SetPosition(XMFLOAT3 pos)
 {
 	transform_.position_ = pos;
-	timer = 90;
+	timer = 180;
 }

@@ -11,16 +11,27 @@ public:
 	~Player();
 	void Update() override;
 	void Draw() override;
+
+	/// <summary>
+	/// プレイヤーの座標をセットする
+	/// </summary>
+	/// <param name="x">X座標</param>
+	/// <param name="y">Y座標</param>
+	void SetPosition(int x, int y);
 private:
 	int hImage;
 	GameObject* sceneTop;
 	bool prevSpaceKey;
-	double jumpSpeed;
-	bool jumpflag;
+	float jumpSpeed;
 	bool onGround;
-	int animeType;
-	int animeFrame;
+	int animType; //状況
+	int animFrame;//コマ
 	int frameCounter;
-
-
+	bool active;
+	bool onactive;
+	enum State {
+		S_Walk = 0,
+		S_Cry,
+	};
+	State state;
 };

@@ -20,4 +20,24 @@ public:
 
 	//開放
 	void Release() override;
+
+	bool CanMove();
+private:
+	enum State {
+		S_Ready, //Ready表示中(2秒間すたーとを表示)
+		S_Play, //ゲーム中
+		S_Clear, //ゲームクリア(クリアを表示してボタンが押されるまで待つ)
+		S_Dead, //死亡(ゲームオーバーを表示してボタンが押されるまで待つ)
+	};
+	State state; //ステートの値を保持
+	float readyTimer;
+	void StartReady();
+	void UpdateReady();
+	void StartPlay();
+	void UpdatePlay();
+	void UpdateClear();
+public:
+	void StartDead();
+private:
+	void UpdateDead();
 };
