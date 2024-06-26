@@ -4,13 +4,13 @@
 /// <summary>
 /// ƒvƒŒƒCƒ„[‚ª“Š‚°‚éÎ
 /// </summary>
-class Stone : public GameObject
+class SOLDIER : public GameObject
 {
 
 
 public:
-	Stone(GameObject* scene);
-	~Stone();
+	SOLDIER(GameObject* scene);
+	~SOLDIER();
 	void Update() override;
 	void Draw() override;
 	void SetPosition(XMFLOAT3 pos);

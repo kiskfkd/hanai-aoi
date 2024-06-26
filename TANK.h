@@ -4,13 +4,13 @@
 /// <summary>
 /// ƒvƒŒƒCƒ„[‚ª“Š‚°‚éÎ
 /// </summary>
-class Stone : public GameObject
+class TANK : public GameObject
 {
 
 
 public:
-	Stone(GameObject* scene);
-	~Stone();
+	TANK(GameObject* scene);
+	~TANK();
 	void Update() override;
 	void Draw() override;
 	void SetPosition(XMFLOAT3 pos);

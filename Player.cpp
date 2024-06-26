@@ -6,7 +6,9 @@
 #include "Field.h"
 #include "Bird.h"
 #include "TestScene.h"
-
+#include"EMP.h"
+#include"TANK.h"
+#include"SOLDIER.h"
 namespace {
 	const float MOVE_SPEED = 1.0f;
 	const float GROUND = 400.0f;
@@ -28,6 +30,7 @@ Player::Player(GameObject* parent) : GameObject(sceneTop)
 	frameCounter = 0;
 	state = S_Walk;
 	active = true;
+	//timer = 180;
 }
 
 Player::~Player()
@@ -132,40 +135,41 @@ void Player::Update()
 		}
 	}*/
 	if (CheckHitKey(KEY_INPUT_A)) {
-		if (onactive == false) {
-			if (active)
-			{
-				Stone* st = Instantiate<Stone>(GetParent());
-				st->SetPosition(transform_.position_);
+		if (active){
+				TANK* tank = Instantiate<TANK>(GetParent());
+				tank->SetPosition(transform_.position_);
 				active = false;
-			}
-			onactive = true;
+				ttimer = 180;
+		}	
+		if (--ttimer <= 0) {
+			active = true;
 		}
 	}
-	else {
-		onactive = false;
-	}
+	
 	if (CheckHitKey(KEY_INPUT_S)) {
-		if (onactive == false) {
 			if (active)
 			{
-				Stone* st = Instantiate<Stone>(GetParent());
-				st->SetPosition(transform_.position_);
+				EMP* emp = Instantiate<EMP>(GetParent());
+				emp->SetPosition(transform_.position_);
 				active = false;
+				etimer = 180;
+			}	
+			if (--etimer <= 0) {
+				active = true;
 			}
-			onactive = true;
-		}
 	}
 	if (CheckHitKey(KEY_INPUT_D)) {
-		if (onactive == false) {
 			if (active)
 			{
-				Stone* st = Instantiate<Stone>(GetParent());
-				st->SetPosition(transform_.position_);
+				SOLDIER* so = Instantiate<SOLDIER>(GetParent());
+				so->SetPosition(transform_.position_);
 				active = false;
+				stimer = 180;
 			}
-			onactive = true;
-		}
+			if (--stimer <= 0) {
+				active = true;
+			}
+			
 	}
 	std::list<Bird*> pBirds = GetParent()->FindGameObjects<Bird>();
 	for (Bird* pBird : pBirds) {

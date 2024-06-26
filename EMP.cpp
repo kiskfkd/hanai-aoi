@@ -1,17 +1,17 @@
-#include "Stone.h"
+#include "EMP.h"
 #include <assert.h>
 #include "Camera.h"
 namespace {
 	const float speed = 2.0f;
 }
 
-Stone::Stone(GameObject* scene) : GameObject(scene)
+EMP::EMP(GameObject* scene) : GameObject(scene)
 {
 	hImage = LoadGraph("Assets/stone.png");
 	assert(hImage > 0);
 }
 
-Stone::~Stone()
+EMP::~EMP()
 {
 	if (hImage > 0)
 	{
@@ -19,7 +19,7 @@ Stone::~Stone()
 	}
 }
 
-void Stone::Update()
+void EMP::Update()
 {
 	transform_.position_.x += speed;
 	if (--timer <= 0)
@@ -28,7 +28,7 @@ void Stone::Update()
 	}
 }
 
-void Stone::Draw()
+void EMP::Draw()
 {
 	int x = (int)transform_.position_.x;
 	int y = (int)transform_.position_.y;
@@ -39,7 +39,7 @@ void Stone::Draw()
 	DrawGraph(x, y, hImage, TRUE);
 }
 
-void Stone::SetPosition(XMFLOAT3 pos)
+void EMP::SetPosition(XMFLOAT3 pos)
 {
 	transform_.position_ = pos;
 	timer = 180;

@@ -28,10 +28,12 @@ private:
 	int animFrame;//ÉRÉ}
 	int frameCounter;
 	bool active;
-	bool onactive;
 	enum State {
 		S_Walk = 0,
 		S_Cry,
 	};
 	State state;
+	int ttimer;
+	int etimer;
+	int stimer;
 };
