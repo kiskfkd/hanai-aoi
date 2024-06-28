@@ -1,7 +1,7 @@
 #include "Player.h"
 #include <DxLib.h>
 #include <assert.h>
-#include "Stone.h"
+//#include "Stone.h"
 #include "Camera.h"
 #include "Field.h"
 #include "Bird.h"

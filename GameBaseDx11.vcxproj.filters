@@ -14,6 +14,9 @@
     <Filter Include="01Engine\ResourceManager">
       <UniqueIdentifier>{bedee914-5063-4c08-95bb-79c861b4969c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="PLAY">
+      <UniqueIdentifier>{023c02bd-e1d1-4e89-8128-9d50e4740f31}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\GameObject.cpp">
@@ -35,15 +38,24 @@
       <Filter>01Engine\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="TestScene.cpp" />
-    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Stone.cpp" />
     <ClCompile Include="Bird.cpp" />
     <ClCompile Include="Field.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Banner.cpp" />
-    <ClCompile Include="TANK.cpp" />
-    <ClCompile Include="EMP.cpp" />
-    <ClCompile Include="SOLDIER.cpp" />
+    <ClCompile Include="Player.cpp">
+      <Filter>PLAY</Filter>
+    </ClCompile>
+    <ClCompile Include="EMP.cpp">
+      <Filter>PLAY</Filter>
+    </ClCompile>
+    <ClCompile Include="SOLDIER.cpp">
+      <Filter>PLAY</Filter>
+    </ClCompile>
+    <ClCompile Include="TANK.cpp">
+      <Filter>PLAY</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameObject.h">
@@ -65,15 +77,24 @@
       <Filter>01Engine\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="TestScene.h" />
-    <ClInclude Include="Player.h" />
     <ClInclude Include="Stone.h" />
     <ClInclude Include="Bird.h" />
     <ClInclude Include="Field.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Ease.h" />
     <ClInclude Include="Banner.h" />
-    <ClInclude Include="TANK.h" />
-    <ClInclude Include="EMP.h" />
-    <ClInclude Include="SOLDIER.h" />
+    <ClInclude Include="Player.h">
+      <Filter>PLAY</Filter>
+    </ClInclude>
+    <ClInclude Include="EMP.h">
+      <Filter>PLAY</Filter>
+    </ClInclude>
+    <ClInclude Include="SOLDIER.h">
+      <Filter>PLAY</Filter>
+    </ClInclude>
+    <ClInclude Include="TANK.h">
+      <Filter>PLAY</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h" />
   </ItemGroup>
 </Project>

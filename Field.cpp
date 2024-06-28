@@ -65,6 +65,12 @@ void Field::Reset()
 				pbird->SetPosition(w * 32, h * 32);
 			}
 			break;
+
+			case 2:
+			{
+				Bird* pbird = Instantiate<Bird>(GetParent());
+			}
+			break;
 			}
 		}
 	}

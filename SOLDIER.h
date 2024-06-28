@@ -14,7 +14,8 @@ public:
 	void Update() override;
 	void Draw() override;
 	void SetPosition(XMFLOAT3 pos);
-
+	//‰~‚Ì“–‚½‚è”»’è‚ð‚·‚é
+	bool CollideCircle(float x, float y, float r);
 private:
 	int hImage;
 	int timer;

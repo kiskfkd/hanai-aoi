@@ -2,7 +2,7 @@
 #include <assert.h>
 #include "Camera.h"
 #include "TestScene.h"
-
+#include"SOLDIER.h"
 namespace {
 	static const int SCREEN_WIDTH = 1280;
 };
@@ -45,6 +45,13 @@ void Bird::Update()
 	sinAngle += 3.0f;//“x
 	float sinValue = sinf(sinAngle * DX_PI_F / 180.0f);
 	transform_.position_.y = baseY + sinValue * 50;
+
+	std::list<SOLDIER*> psoldiers = GetParent()->FindGameObjects<SOLDIER>();
+	for (SOLDIER* psoldier : psoldiers) {
+		if (psoldier->CollideCircle(transform_.position_.x + 32.0f, transform_.position_.y + 32.0f, 20.0f)) {
+			KillMe();
+		}
+	}
 }
 
 void Bird::Draw()
