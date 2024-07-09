@@ -136,10 +136,10 @@ void Player::Update()
 	}*/
 	if (CheckHitKey(KEY_INPUT_A)) {
 		if (active){
-				TANK* tank = Instantiate<TANK>(GetParent());
-				tank->SetPosition(transform_.position_);
-				active = false;
-				ttimer = 180;
+			TANK* tank = new TANK(scene); // sceneはGameObjectのポインタなど、適切なシーンオブジェクトを指定する
+
+			// 特定の場所に足場を作成
+			tank->CreatePlatform(XMFLOAT3(300.0f, 200.0f, 0.0f), 500); // (300, 200)に足場を設置、500フレームの制限時間
 		}	
 		if (--ttimer <= 0) {
 			active = true;

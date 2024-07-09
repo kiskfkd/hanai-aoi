@@ -41,10 +41,10 @@ void Bird::Update()
 		KillMe();
 		return;
 	}
-	transform_.position_.x -= 1.0f;
+	//transform_.position_.x -= 1.0f;
 	sinAngle += 3.0f;//“x
 	float sinValue = sinf(sinAngle * DX_PI_F / 180.0f);
-	transform_.position_.y = baseY + sinValue * 50;
+	//transform_.position_.y = baseY + sinValue * 50;
 
 	std::list<SOLDIER*> psoldiers = GetParent()->FindGameObjects<SOLDIER>();
 	for (SOLDIER* psoldier : psoldiers) {
