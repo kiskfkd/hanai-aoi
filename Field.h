@@ -1,48 +1,32 @@
 #pragma once
 #include "Engine/GameObject.h"
+#include "Platform.h"
+#include <vector>
 
-/// <summary>
-/// 地面（プレイフィールド）
-/// </summary>
 class Field : public GameObject
 {
 public:
-	Field(GameObject* scene);
-	~Field();
-	void Reset();
-	void Update() override;
-	void Draw() override;
+    Field(GameObject* scene);
+    ~Field();
+    void Reset();
+    void Update() override;
+    void Draw() override;
 
-	/// <summary>
-	/// 右側の点が当たっているか調べる
-	/// </summary>
-	/// <param name="x">X座標</param>
-	/// <param name="y">Y座標</param>
-	/// <returns>めりこんだ量(ドット)</returns>
-	int CollisionRight(int x, int y);
+    int CollisionRight(int x, int y);
+    int CollisionLight(int x, int y);
+    int CollisionDown(int x, int y);
+    int CollisionUp(int x, int y);
 
-	/// <summary>
-	/// 左側の点が当たっているか調べる
-	/// </summary>
-	/// <param name="x">X座標</param>
-	/// <param name="y">Y座標</param>
-	/// <returns>めり込んだ量(ドット)</returns>
-	int CollisionLight(int x, int y);
-
-	/// <summary>
-	/// 下の点が当たっているか調べる
-	/// </summary>
-	/// <param name="x">X座標</param>
-	/// <param name="y">Y座標</param>
-	/// <returns>めり込んだ量(ドット)</returns>
-	int CollisionDown(int x, int y);
-
-	int CollisionUp(int x, int y);
 private:
-	int hImage;
+    int hImage;
+    int hPlatformImage;
+    bool IsWallBlock(int x, int y);
+    int* Map;
+    int width;
+    int height;
+    static std::vector<Platform> platforms;
 
-	bool IsWallBlock(int x, int y);
-	int* Map;
-	int width;
-	int height;
+    bool IsPlatformBlock(int x, int y);
+
+    void TogglePlatforms();
 };

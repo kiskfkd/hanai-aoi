@@ -1,39 +1,33 @@
 #pragma once
 #include "Engine/GameObject.h"
+#include <DirectXMath.h>
+#include <vector>
 
-/// <summary>
-/// プレイヤーキャラ
-/// </summary>
-class Player : public GameObject
-{
+using namespace DirectX;
+
+class Player : public GameObject {
 public:
-	Player(GameObject* scene);
-	~Player();
-	void Update() override;
-	void Draw() override;
+    Player(GameObject* parent);
+    ~Player();
 
-	/// <summary>
-	/// プレイヤーの座標をセットする
-	/// </summary>
-	/// <param name="x">X座標</param>
-	/// <param name="y">Y座標</param>
-	void SetPosition(int x, int y);
+    void Update();
+    void Draw();
+    void SetPosition(int x, int y);
+
 private:
-	int hImage;
-	GameObject* sceneTop;
-	bool prevSpaceKey;
-	float jumpSpeed;
-	bool onGround;
-	int animType; //状況
-	int animFrame;//コマ
-	int frameCounter;
-	bool active;
-	enum State {
-		S_Walk = 0,
-		S_Cry,
-	};
-	State state;
-	int ttimer;
-	int etimer;
-	int stimer;
+    int hImage;
+    float jumpSpeed;
+    bool onGround;
+    int animType;
+    int animFrame;
+    int frameCounter;
+    enum State { S_Walk, S_Cry } state;
+    bool tactive;
+    bool eactive;
+    bool sactive;
+    bool prevSpaceKey;
+    int timer;
+    int ttimer;  // TANK用のタイマー
+    int etimer;  // EMP用のタイマー
+    int stimer;  // SOLDIER用のタイマー
 };
