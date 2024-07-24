@@ -1,7 +1,7 @@
 #include "Platform.h"
 
-Platform::Platform(XMFLOAT3 pos, bool active)
-    : position(pos), isActive(active)
+Platform::Platform(XMFLOAT3 pos, bool active, int lifetime)
+    : position(pos), isActive(active), lifetime(lifetime)
 {
 }
 
@@ -18,6 +18,19 @@ bool Platform::IsActive() const
 void Platform::ToggleActive()
 {
     isActive = !isActive;
+}
+
+void Platform::DecreaseLifetime()
+{
+    if (lifetime > 0)
+    {
+        --lifetime;
+    }
+}
+
+bool Platform::IsExpired() const
+{
+    return lifetime <= 0;
 }
 
 bool Platform::IsColliding(int x, int y) const

@@ -6,7 +6,7 @@
 #include "Bird.h"
 #include "TANK.h"
 #include "Engine/CsvReader.h"
-
+#include"Enemy.h"
 std::vector<Platform> Field::platforms;
 
 Field::Field(GameObject* scene)
@@ -15,8 +15,8 @@ Field::Field(GameObject* scene)
     hImage = LoadGraph("Assets/bgchar.png");
     assert(hImage > 0);
 
-    /*hPlatformImage = LoadGraph("Assets/platform.png");
-    assert(hPlatformImage > 0);*/
+    hPlatformImage = LoadGraph("Assets/TANK.png");
+    assert(hPlatformImage > 0);
 }
 
 Field::~Field()
@@ -25,10 +25,10 @@ Field::~Field()
     {
         DeleteGraph(hImage);
     }
-    /*if (hPlatformImage > 0)
+    if (hPlatformImage > 0)
     {
         DeleteGraph(hPlatformImage);
-    }*/
+    }
     if (Map != nullptr)
     {
         delete[] Map;
@@ -78,8 +78,8 @@ void Field::Reset()
             break;
             case 1:
             {
-                Bird* pbird = Instantiate<Bird>(GetParent());
-                pbird->SetPosition(w * 32, h * 32);
+                Enemy* penemy = Instantiate<Enemy>(GetParent());
+                penemy->SetPosition(w * 32, h * 32);
             }
             break;
             case 2:
@@ -91,7 +91,7 @@ void Field::Reset()
             case 3:
             {
                 XMFLOAT3 position(w * 32.0f, h * 32.0f, 0.0f);
-                platforms.push_back(Platform(position, true));
+                platforms.push_back(Platform(position, true, 180)); // 初期寿命を180フレームに設定
             }
             break;
             }
@@ -106,6 +106,19 @@ void Field::Update()
 
     if (CheckHitKey(KEY_INPUT_T))
         TogglePlatforms();
+
+    for (auto it = platforms.begin(); it != platforms.end(); )
+    {
+        it->DecreaseLifetime();
+        if (it->IsExpired())
+        {
+            it = platforms.erase(it);
+        }
+        else
+        {
+            ++it;
+        }
+    }
 }
 
 void Field::Draw()
@@ -196,6 +209,11 @@ bool Field::IsPlatformBlock(int x, int y)
         }
     }
     return false;
+}
+
+void Field::AddPlatform(XMFLOAT3 position)
+{
+    platforms.push_back(Platform(position, true, 180)); // 足場の寿命を180フレームに設定
 }
 
 void Field::TogglePlatforms()

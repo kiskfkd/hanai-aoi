@@ -1,7 +1,9 @@
 #include "TANK.h"
 #include <DxLib.h>
 #include <assert.h>
-#include"Camera.h"
+#include "Camera.h"
+#include "Platform.h"
+
 std::vector<Platform> TANK::platforms;
 
 TANK::TANK(GameObject* scene) : GameObject(scene), hImage(-1), hTankImage(-1), timer(0) {
@@ -37,5 +39,5 @@ void TANK::SetPosition(XMFLOAT3 pos) {
 }
 
 void TANK::CreatePlatform(XMFLOAT3 pos, bool isActive) {
-    platforms.push_back(Platform(pos, isActive));
+    platforms.push_back(Platform(pos, isActive, 180)); // ‘«ê‚Ìõ–½‚ğ180ƒtƒŒ[ƒ€‚Éİ’è
 }

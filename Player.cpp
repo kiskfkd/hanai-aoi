@@ -8,11 +8,11 @@
 #include "EMP.h"
 #include "TANK.h"
 #include "SOLDIER.h"
-
+#include"Enemy.h"
 namespace {
     const float MOVE_SPEED = 1.0f;
     const float GROUND = 400.0f;
-    const float JUMP_HEIGHT = 64.0f * 4.0f;
+    const float JUMP_HEIGHT = 64.0f * 2.0f;
     const float GRAVITY = 9.8f / 60.0f;
 }
 
@@ -105,9 +105,10 @@ void Player::Update()
     // TANKの足場を作成するロジック
     if (CheckHitKey(KEY_INPUT_A)) {
         if (tactive) {
-            TANK* tank = new TANK(GetParent());
-            // トグル可能な足場を作成
-            tank->CreatePlatform(XMFLOAT3(transform_.position_.x + 100.0f, transform_.position_.y + 100.0f, 0.0f), true);
+            // 足場を作成
+            if (pField != nullptr) {
+                pField->AddPlatform(XMFLOAT3(transform_.position_.x + 100.0f, transform_.position_.y + 65.0f, 0.0f));
+            }
             tactive = false;
             ttimer = 180;
         }
@@ -122,7 +123,7 @@ void Player::Update()
         if (eactive) {
             EMP* emp = Instantiate<EMP>(GetParent());
             emp->SetPosition(transform_.position_);
-           eactive = false;
+            eactive = false;
             etimer = 180;
         }
     }
@@ -154,7 +155,15 @@ void Player::Update()
             scene->StartDead();
         }
     }
-
+    std::list<Enemy*> penemys = GetParent()->FindGameObjects<Enemy>();
+    for (Enemy* penemy : penemys) {
+        if (penemy->CollideCircle(transform_.position_.x + 32.0f, transform_.position_.y + 32.0f, 20.0f)) {
+            animType = 4;
+            animFrame = 0;
+            state = S_Cry;
+            scene->StartDead();
+        }
+    }
     // カメラ位置の調整
     Camera* cam = GetParent()->FindGameObject<Camera>();
     int x = (int)transform_.position_.x - cam->GetValue();

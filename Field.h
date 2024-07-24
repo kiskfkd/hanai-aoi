@@ -1,4 +1,5 @@
 #pragma once
+
 #include "Engine/GameObject.h"
 #include "Platform.h"
 #include <vector>
@@ -17,6 +18,9 @@ public:
     int CollisionDown(int x, int y);
     int CollisionUp(int x, int y);
 
+    void AddPlatform(XMFLOAT3 position);
+    void TogglePlatforms();
+
 private:
     int hImage;
     int hPlatformImage;
@@ -27,6 +31,4 @@ private:
     static std::vector<Platform> platforms;
 
     bool IsPlatformBlock(int x, int y);
-
-    void TogglePlatforms();
 };

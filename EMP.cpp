@@ -7,7 +7,7 @@ namespace {
 
 EMP::EMP(GameObject* scene) : GameObject(scene)
 {
-	hImage = LoadGraph("Assets/stone.png");
+	hImage = LoadGraph("Assets/robot2.png");
 	assert(hImage > 0);
 }
 

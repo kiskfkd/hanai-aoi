@@ -7,7 +7,7 @@ namespace {
 
 SOLDIER::SOLDIER(GameObject* scene) : GameObject(scene)
 {
-	hImage = LoadGraph("Assets/stone.png");
+	hImage = LoadGraph("Assets/robot3.png");
 	assert(hImage > 0);
 }
 

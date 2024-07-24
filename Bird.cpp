@@ -9,7 +9,7 @@ namespace {
 
 Bird::Bird(GameObject* scene)
 {
-	hImage = LoadGraph("Assets/mob.png");
+	hImage = LoadGraph("Assets/denkisaku.png");
 	assert(hImage > 0);
 	transform_.position_.x = 800.0f;
 	transform_.position_.y = 500.0f;
@@ -62,7 +62,7 @@ void Bird::Draw()
 	if (cam != nullptr) {
 		x -= cam->GetValue();
 	}
-	DrawRectGraph(x, y, 0, 0, 64, 64, hImage, TRUE);
+	//DrawRectGraph(x, y, 0, 0, 64, 64, hImage, TRUE);
 	//DrawCircle(x + 32.0f, y + 32.0f, 24.0f, GetColor(255, 0, 0),0);
 }
 
